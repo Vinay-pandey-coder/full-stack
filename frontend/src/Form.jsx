@@ -4,13 +4,19 @@ const Form = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
+
+  const API_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000/add"
+    : "https://full-stack-fmqw.onrender.com/add";
+
   async function Submit(e) {
     e.preventDefault();
     if (!name || !password) {
       alert("please enter your details");
     } else {
       let data = { name, password };
-      let response = await fetch("https://full-stack-fmqw.onrender.com/add", {
+      let response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
