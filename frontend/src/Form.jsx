@@ -10,7 +10,7 @@ const Form = () => {
       alert("please enter your details");
     } else {
       let data = { name, password };
-      let response = await fetch("http://localhost:3000/add", {
+      let response = await fetch("https://full-stack-fmqw.onrender.com/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
