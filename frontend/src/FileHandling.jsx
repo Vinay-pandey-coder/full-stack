@@ -4,26 +4,43 @@ import { useState } from 'react'
 const FileHandling = () => {
   const [file,setFile] = useState([])
   const [preview,setPreview] = useState([])
-  console.log(preview)
-  console.log(file)
-  
-  // function submitHandler(){
 
-  // }
+    const API_URL =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/upload"
+      : "https://full-stack-fmqw.onrender.com/upload";
+  
+  const  submitHandler = async(e)=>{
+      e.preventDefault()
+
+      const formdata = new FormData()
+      formdata.append('file',file)
+
+      const res = await fetch(API_URL,{
+        method:"POST",
+        body:formdata
+      })
+
+      const data = await res.json()
+      console.log(data)
+      alert("Uploaded Successfully!");
+  }
 
 
   return (
     <>
-      <form action="">
+      <form action="" onSubmit={submitHandler}>
         <input type="file" multiple onChange={(e)=>{
-          let files = e.target.files
+          let files = e.target.files[0]
           setFile(files)
 
-          let arr = []
-          for(let i = 0; i<files.length;i++){
-            arr.push(URL.createObjectURL(files[i]))
-          }
-          setPreview(arr)
+          // let arr = []
+          // for(let i = 0; i<files.length;i++){
+          //   arr.push(URL.createObjectURL(files[i]))
+          // }
+          // setPreview(arr)
+
+          setPreview([URL.createObjectURL(files)])
 
         }}/>
         {/* preview section */}
