@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Form = () => {
   const [name, setName] = useState("");
@@ -10,10 +12,17 @@ const Form = () => {
     ? "http://localhost:3000/add"
     : "https://full-stack-fmqw.onrender.com/add";
 
+    
   async function Submit(e) {
     e.preventDefault();
     if (!name || !password) {
-      alert("please enter your details");
+      toast.error("please enter your details",{
+        style:{
+          background:"white",
+          color:"black"
+        }
+      })
+      return
     } else {
       let data = { name, password };
       let response = await fetch(API_URL, {
@@ -27,10 +36,19 @@ const Form = () => {
       let fdata = await response.json();
       console.log(fdata);
     }
+
+    toast.success("data filed",{
+      style:{
+        background:"white",
+        color:"black"
+      }
+    })
   }
 
   return (
     <>
+
+      <ToastContainer/>
       <form onSubmit={Submit}>
         <input
           value={name}
