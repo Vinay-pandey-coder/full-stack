@@ -37,7 +37,7 @@ app.post('/add',async(req,res)=>{
 
 app.delete('/delete/:id',async(req,res)=>{
     const {id} = req.params
-    const result = db.collection('user').deleteOne({
+    const result = await db.collection('user').deleteOne({
       _id:new ObjectId(id)
     })
     if (result.deletedCount === 1) {
