@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-const url = 'mongodb+srv://abhi837688_db_user:pandey@cluster0.wyqtfhv.mongodb.net/?appName=Cluster0'
+const url = 'mongodb+srv://abhi837688_db_user:pandey@cluster0.ur8iwc7.mongodb.net/?appName=Cluster0'
 const client = new MongoClient(url)
 
 let db;
@@ -51,6 +51,7 @@ app.delete('/delete/:id',async(req,res)=>{
 app.get('/users/',async(req,res)=>{
   const users = await db.collection('user').find().toArray()
   res.json(users)
+  console.log('data added')
 })
 
 
